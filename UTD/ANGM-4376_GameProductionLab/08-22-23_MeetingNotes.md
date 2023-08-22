@@ -31,3 +31,5 @@
 9.  Jared Ellis
 10. Kellyn Mendez
     - double major??
+
+Gamemodes, think about merging, INHERITANCE INHERITANCE INHERITANCE 
