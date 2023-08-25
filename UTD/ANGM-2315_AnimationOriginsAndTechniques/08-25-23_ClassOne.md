@@ -69,7 +69,7 @@
 - Write/Type report in MLA format about the film
 - due Wednesday before class next week
 
-### Cast Studies
+### Case Studies
 - Guided exercises
 - only analyzing short films
 - only animation short films
