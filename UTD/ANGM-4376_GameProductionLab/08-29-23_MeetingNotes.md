@@ -26,3 +26,7 @@
     - Two: too much time => over-engineering problems => more problems
     - If you find yourself needing to spend way too much time to meet deadlines, let your PM or me know and we'll help in any way we can.
   - Thankfully, Ian, the lead designer is focused on simplicity more than fancy mechanics.
+
+### File Management
+- how do you guys wanna do File Management to make things more organized
+- should file management be determined by teams or as a departmemt?
