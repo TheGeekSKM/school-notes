@@ -35,7 +35,7 @@
 - Zagreb Film Archive on YouTube
   - the Zagreb Animations have such a varied style
 
-#### Surogat
+#### Surogat [SHORT FILM]
 - honestly, if this was written in english, I would not have noticed that it wasn't a Warner Bros. Cartoon
 - simple background
 - simple shapes, abstract
@@ -43,7 +43,7 @@
 - most of the sfx seem to be instruments
 - First film outside of North America to win Oscar
 
-#### Ceremonija
+#### Ceremonija [SHORT FILM]
 - using shapes to showcase things like photograph or character's area of focus
   - both animations do that
 
@@ -74,7 +74,7 @@
   - amazing paintings
 
 
-#### Cheburashka
+#### Cheburashka [SHORT FILM]
 - adorable
 - russian character
 - copyright fight over character since Cheburashka was a comic character first
@@ -87,7 +87,7 @@
 - Russia has a long complex history with the mistreatment of Jews
 - When Cheburashka was produced, the common language was Yiddish instead of Russian
 
-#### Man in Frame
+#### Man in Frame [SHORT FILM]
 - Really Cool Intro
 - Monochromatic Color Scheme
 - NVM, the images are multi colored
@@ -98,7 +98,7 @@
 - The Y-Axis seems to denote power hierarchy
 - Frame gets bigger as he gets more powerful
   
-#### Door
+#### Door [SHORT FILM]
 - Stop Motion
 - very detailed background
 - Door doesn't seem to open
@@ -118,7 +118,7 @@
   - Dimensions of Dialogue
     - uncomfy
 
-#### Dimensions of Dialogue
+#### Dimensions of Dialogue [SHORT FILM]
 - So much visual noise
 - Chontrolled Chaos in every frame
 - Models get more and more detailed every time they fight
@@ -126,3 +126,25 @@
   - I do wonder who the target audience is for Jan
   - Who does he make his films for
     - Himself? Certain People? The Public?
+
+### Poland
+- Jan Lenica
+  - most important
+  - heavily influenced Monty Python
+  - Labrynth Film
+- Zbigniew R.
+  - Tango
+    - all convieved in Tango
+    - Cut outs
+    - characters keep repeating their sequence
+- Jerzy Kucia
+  - teaches and has his students to work on his films
+  - paint and cutout
+  - cryptic, hypnotic, annoying, repetitive, tedious, and beautiful
+
+### Hungary
+- Marcell Jankovics
+  - Sysiphus
+- Ferenc Rofusz
+  - Fly
+  - Wonderful Animation
