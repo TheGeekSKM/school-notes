@@ -47,6 +47,7 @@
   - Created Hybrid crops
 
 ## Monohybrid Cross
+### Monohybrid Cross Definition: A cross in which both parents are heterozygous for a single trait
 1. P1 = Tall x Short
 2. F1 = No Short Plants -> Non True Breeding since there are no short plants and that parental characteristic is gone
 3. Self-Cross = Crossbred F1 with other F1 plants
