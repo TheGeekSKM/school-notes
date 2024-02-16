@@ -185,7 +185,7 @@
   - still see nuclear envelope
 - Metaphase
   - chromasomes appear right at the cnter of the Nucleus
-  - centrioles will extend spindle fibers which attach to the chomosomes and split them
+  - centrioles will extend spindle fibers which attach to the chromosomes and split them
   - chromosmes are pulled with equal force
 - Anaphase
   - spindle fibers pull
