@@ -1,4 +1,7 @@
-def get_square_pattern(max_rows):
+import random
+
+
+def get_square_pattern(max_rows=1):
     value = ''
 
     for y in range(max_rows):
@@ -10,7 +13,7 @@ def get_square_pattern(max_rows):
     return value
 
 
-def get_rect_pattern(max_rows, max_cols):
+def get_rect_pattern(max_rows=1, max_cols=1):
     value = ''
     for y in range(max_rows):
         for x in range(max_cols):
@@ -21,7 +24,7 @@ def get_rect_pattern(max_rows, max_cols):
     return value
 
 
-def get_alternating_rect_pattern(max_rows, max_cols):
+def get_alternating_rect_pattern(max_rows=1, max_cols=1):
     value = ''
 
     for y in range(max_rows):
@@ -51,7 +54,7 @@ def validate_running_bond(max_rows, y, running_bond, line_string):
     return line_string
 
 
-def get_brick_pattern(max_rows, max_cols, running_bond):
+def get_brick_pattern(max_rows=1, max_cols=1, running_bond=False):
     final_string = ""
 
     for y in range(max_rows):
@@ -83,7 +86,7 @@ def determine_useable_char(useable_char, y, emojis):
     return useable_char
 
 
-def get_checkered_pattern(max_rows, max_cols):
+def get_checkered_pattern(max_rows=1, max_cols=1):
     final_string, emojis, useable_char = initialize_variables()
 
     for y in range(max_rows):
@@ -103,70 +106,69 @@ def get_checkered_pattern(max_rows, max_cols):
     return final_string
 
 
-# TODO: MAKE LESS THAN 15
-def get_right_arrow_pattern(max_cols):
-    """Returns a pattern of 🐟 emojis in the shape of a right arrow.
-
-    Arguments:
-        max_cols: the max number of emojis in a line.
-
-    Returns:
-        str: Returns a string pattern of emojis.
-
-    Examples:
-        >>> print(get_right_arrow_pattern(3))
-        🐟
-        🐟🐟
-        🐟🐟🐟
-        🐟🐟
-        🐟
-
-        >>> print(get_rect_pattern(2))
-        🐟
-        🐟🐟
-        🐟
-    """
-    final_string = ""
-    num_of_elements = 1
-    increasing = True
-    num_of_repetitions = 1
-    
+def loop(final_string, num_of_elements, increasing, num_of_repetitions, mc):
     while num_of_elements > 0:
         line_string = ""
-        
+
         for i in range(num_of_elements):
             line_string += "🐟"
-        
-        if num_of_repetitions > max_cols:
-            increasing = False    
+
+        if num_of_repetitions > mc:
+            increasing = False
         num_of_repetitions += 1
-        
+
         if increasing:
             num_of_elements += 1
         else:
             num_of_elements -= 1
-            
+
         final_string += line_string + "\n"
-        
+
     return final_string
 
 
-def get_my_awesome_pattern():
-    """Returns your own awesome procedural emoji pattern.
+def get_right_arrow_pattern(max_cols):
+    final = ""
 
-    Returns:
-        str: Returns a string pattern of emojis.
-    """
-    # TODO: Implement your awesome procedural pattern.
-    # Let loose your creativity!
-    # You can choose whatever arguments makes sense for your pattern.
-    # You pattern must change based on your arguments for it to be
-    # procedural.
-    # You must, use a combination of loops and conditional statements to
-    # generate your pattern.
-    # Each unique emoji should not repeat more than once in your code.
-    # (It wouldn't be procedural otherwise. 😉)
-    pass
+    if not isinstance(max_cols, int):
+        raise TypeError("max_cols must be an integer")
+
+    if max_cols == 0:
+        return ""
+
+    num_of_elements = 1
+    inc = True
+    num_repeat = 2
+
+    final = loop(final, num_of_elements, inc, num_repeat, max_cols)
+    return final
+
+
+def set_variables(array, randomized=False):
+    if randomized:
+        f, b, d, c, s = array
+    else:
+        selected_elements = random.sample(array, len(array))
+        f, b, d, c, s = selected_elements
+
+    return f, b, d, c, s
+
+
+def get_my_awesome_pattern(square_size=10, randomized=False):
+    array = ["🐟", "🧱", "💎", "👑", "🦈"]
+    f, b, d, c, s = set_variables(array, randomized)
+
+    final = f * square_size + "\n"
+    final += f + b * (square_size - 2) + f + "\n"
+    final += f + b + d * (square_size - 4) + b + f + "\n"
+    final += f + b + d + c * (square_size - 6) + d + b + f + "\n"
+    final += f + b + d + c + s * (square_size - 8) + c + d + b + f + "\n"
+    final += f + b + d + c * (square_size - 6) + d + b + f + "\n"
+    final += f + b + d * (square_size - 4) + b + f + "\n"
+    final += f + b * (square_size - 2) + f + "\n"
+    final += f * square_size + "\n"
+
+    return final
 
 
 def main():
@@ -177,22 +179,11 @@ def main():
     # your pattern that best shows off the pattern.
     # Show a variety of patterns generated from different argument
     # inputs to the function. Don't just call your awesome pattern once.
-    print(get_square_pattern(10))
-    print(" ")
-    print(get_rect_pattern(7, 9))
-    print(" ")
-    print(get_alternating_rect_pattern(3, 5))
-    print(" ")
-    print(get_brick_pattern(3, 5, True))
-    print(" ")
-    print(get_brick_pattern(6, 5, True))
-    print(" ")
-    print(get_brick_pattern(3, 5, False))
-    print(" ")
-    print(get_checkered_pattern(5, 6))
-    print(" ")
 
     print(get_my_awesome_pattern())
+    print(get_my_awesome_pattern(12, True))
+    print(get_my_awesome_pattern(15, True))
+    print(get_my_awesome_pattern(20, False))
 
 
 # DO NOT modify this code
