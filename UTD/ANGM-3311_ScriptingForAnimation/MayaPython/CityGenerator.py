@@ -1,0 +1,102 @@
+import maya.cmds as cmds
+import random
+
+class Settings_Window(object):
+    
+    #constructor
+    def __init__(self):
+        self.window = 'settingsWindow'
+        self.title = 'Settings Window'
+        self.size = (800, 600)
+        
+        #close old window if still open
+        if cmds.window(self.window, exists=True):
+            cmds.deleteUI(self.window, window=True)
+            
+        #create new window
+        self.window = cmds.window(self.window, title=self.title, widthHeight=self.size, s=True)
+        cmds.columnLayout(adjustableColumn=True)
+        
+        #create UI elements
+        cmds.text(self.title)
+        cmds.separator( height=20, style='out' )
+        
+        self.cityGridSize = cmds.floatFieldGrp(numberOfFields=2, label='City Grid Size', value1=10, value2=10)
+        self.buildingNumber = cmds.intSliderGrp(label='Building Number', field=True, minValue=1, maxValue=100, value=10)
+        self.buildingHeight = cmds.floatFieldGrp(numberOfFields=2, label='Building Height', value1=1, value2=10)
+        self.buildingRotationLimits = cmds.floatFieldGrp(numberOfFields=2, label='Building Rotation Limits', value1=0, value2=360)
+        self.customSeed = cmds.intFieldGrp(label='Custom Seed', value1=0)
+        self.customObjectGroupName = cmds.textFieldGrp(label='Custom Building Models Group Name', text='CustomObjectGroup')
+        
+        
+        cmds.separator( height=20, style='none')
+        #generate button
+        # cmds.button(label='Generate', command=self.generate)
+        cmds.button(label='Generate', command=self.generate_city)
+        
+        #display window
+        cmds.showWindow(self.window)
+    
+    
+    def are_meshes_intersecting(mesh1, meshes):
+        vertices1 = cmds.ls(cmds.polyListComponentConversion(mesh1, tv=True), fl=True)
+        
+        for mesh in meshes:
+            vertices = cmds.ls(cmds.polyListComponentConversion(mesh, tv=True), fl=True)
+            for vertex in vertices:
+                if vertex in vertices1:
+                    return True
+        
+        return False
+    
+    
+    def generate_city(self, *args):
+        print('Generating City')
+        
+        cityGridSize = cmds.floatFieldGrp(self.cityGridSize, query=True, value=True)
+        buildingNumber = cmds.intSliderGrp(self.buildingNumber, query=True, value=True)
+        buildingHeight = cmds.floatFieldGrp(self.buildingHeight, query=True, value=True)
+        buildingRotationLimits = cmds.floatFieldGrp(self.buildingRotationLimits, query=True, value=True)
+        customSeed = cmds.intFieldGrp(self.customSeed, query=True, value=True)
+        customObjectGroupName = cmds.textFieldGrp(self.customObjectGroupName, query=True, text=True)
+
+        # check if building group exists
+        if not cmds.objExists("BuildingGroup"):
+            cmds.group(em=True, name="BuildingGroup")
+            cmds.polyCube(name="BuildingTemplate", width=1, height=1, depth=1)
+            cmds.parent("BuildingTemplate", "BuildingGroup")
+        
+        # if the user entered a valid customObjectGroupName, use that group
+        if cmds.objExists(customObjectGroupName):
+            buildingGroup = customObjectGroupName
+            cmds.delete("BuildingGroup")
+        else:
+            buildingGroup = "BuildingGroup"
+
+        # make a city group
+        cmds.group(em=True, name="CityGroup")
+
+        for i in range(buildingNumber):
+            # make a building
+            xPos = random.uniform(-cityGridSize[0]/2, cityGridSize[0]/2)
+            yPos = random.uniform(-cityGridSize[1]/2, cityGridSize[1]/2)
+            
+            # pick a random building from the building group
+            possibleBuildings = cmds.listRelatives(buildingGroup, children=True)
+            possibleBuilding = random.choice(possibleBuildings)
+            
+            cmds.instance(possibleBuilding, name="Building" + str(i))
+            
+            # position, scale, and rotate the building
+            cmds.move(xPos, 0, yPos, "Building" + str(i))
+            cmds.scale(1, random.uniform(buildingHeight[0], buildingHeight[1]), 1, "Building" + str(i))
+            cmds.rotate(0, random.uniform(buildingRotationLimits[0], buildingRotationLimits[1]), 0, "Building" + str(i))
+            cmds.parent("Building" + str(i), "CityGroup")
+        
+        
+        #make a plane the size of city grid size and add it to the city group
+        cmds.polyPlane(name="CityPlane", width=cityGridSize[0], height=cityGridSize[1], sx=1, sy=1)
+        cmds.parent("CityPlane", "CityGroup")
+        
+if __name__ == '__main__':
+    Settings_Window()
