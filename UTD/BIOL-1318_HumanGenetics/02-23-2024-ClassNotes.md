@@ -1,0 +1,82 @@
+# Chapter 9 -> DNA
+
+Francis Crick -> "A genetic material must carry out two jobs: 
+    1. duplicate itself
+    2. control the development of the rest of the cell in a specific way"
+
+- RNA can't divide itself, but DNA can make decisions on when to divide
+
+## History of DNA
+- **Friedrich Miescher, 1871**
+  - a lot of science at this point was done by doctors -> no real scientists
+  - Swiss Physician and Biochemist
+  - As he dressed war wounds, he saw pus
+    - doctors had no idea was pus was
+  - **He called pus "nuclein"**
+  - He found presence of **nitrogen** and **phosphorus**
+  - *Nuclein is what is seen as nucleic acid*
+- **Archibald Garrod, 1902**
+  - English Physician
+  - He linked inheritance of inborn metabolism errors with the lack of certain enzymes
+    - ex: "You aren't able to grow tall because the tall enzyme isn't in your body...but your dad also has the same issue..."
+- **Fredrick Griffith, 1928**
+  - English Microbiologist
+  - Worked with pneumonia bacteria 
+    - Type S -> bacteria is enclosed in polysaccharide (protein) capsule
+    - Type R -> No protein capsule
+  - Termed the conversion of one bacterial type into another as transformation
+    - Type S could become Type R and vice verse given certain conditions
+  - **Discovery of Bacterial Transformation:**
+    - Type R Bacterial does not kill mice -> non-virulent
+    - Type S Bacteria does kill mice -> virulent
+    - Type S (treated with heat) does **not** kill mice
+    - Type R + Heated Type S **does** kill mice -> Live Type S found in dead mice
+    - **Type S Bacteria transferred killing trait to Type R**
+- **Avery, MacLeod, McCarty, 1944**
+  - American Physicians enter the race
+  - Experimented with Protease (protein killing) and DNase (Nuclein killing)
+  - **Experiment #2**
+    - Heat-Treated Smooth Virulent + Protease + Rough Nonvirulent -> mice dead
+    - Heat-Treated Smooth Virulent + DNase + Rough Nonvirulent -> mice alive
+    - This experiment revealed that the protein shell around Type S was **not** the element that gave the Type S the killing trait. Instead it was the **Nuclein** inside that brought about transformation.
+  - DNA is the **transforming principle**
+    - can convert from Type R to Type S
+- **Alfred Hershey and Martha Chase, 1953**
+  - American Microbiologist
+  - both scientists contributed equally
+  - worked on E. Coli bacteria (that was infected with a virus that consisted of a protein head surrounding DNA)
+  - Grew a batch of virus in a medium containing 35S and 32P
+    - no one knew about the dangers of radiactive isotopes and most of these scientist died
+    - but the radioactive molecules can be caught on camera because they kept exuding radiation
+  - **Experiment #3**
+    - virus protein coat was traced with radioactive molecules
+    - DNA inside was also traced (nitrogen, phosphorus, etc)
+    - the transferring element on a virus is not the protein coat around the virus, but the DNA on the inside
+- **Phoebus Levine**
+  - Russian-American Biochemist
+  - identified the 5-carbon sugars ribose (sugar with oxygen atom) in 1909 and deoxyribose (sugar without oxygen atom) in 1929
+    - RNA has Ribose
+    - DNA has Deoxyribose
+  - discovered that the three parts of a necleotide are found in equal proportions:
+    - sugar
+    - phosphate
+- **Erwin Chargaff, 1951**
+  - found ATGC
+  - found relationships between these 
+    - A -> T and G -> C
+- **Rosalind Frnklin and Maurice Wilkins, 1952**
+  - English scientists
+  - Franklin used X-Ray Diffraction
+    - radioactivity
+    - incorporate radioactivity and observe the emission of radiation on x-ray films after treating the DNA in different ways
+  - Discovered that DNA is in two forms:
+    - Form A -> dry in crystalline
+    - Form B -> wet and cellular
+  - Photo 51
+    - looking at a double helix from the top
+    - Franklin came up with the hypothesis that DNA was made up of two different strands that wind around each other
+- **James Watson and Francis Crick**
+  - did **not** perform any experiments
+  - they listened to Franklin and Wilkins and in their minds, they deduced the structure of DNA
+  - they were highly inspired by Wilkins and Franklin, but Wilkins and Franklin get no credit
+    - they included Wilkins, but Franklin died before that unfortunately
