@@ -39,25 +39,19 @@ class Settings_Window(object):
         cmds.separator( height=20, style='none')
         cmds.button(label='Reset', command=self.delete_city)
         
+        cmds.separator( height=20, style='out')
+        cmds.text(label='Debug Log')
+        cmds.separator( height=10, style='none')
+        self.debugLog = cmds.scrollField(editable=False, wordWrap=True, width=800, height=120)
         
         #display window
         cmds.showWindow(self.window)
     
     
-    def are_meshes_intersecting(mesh1, meshes):
-        vertices1 = cmds.ls(cmds.polyListComponentConversion(mesh1, tv=True), fl=True)
-        
-        for mesh in meshes:
-            vertices = cmds.ls(cmds.polyListComponentConversion(mesh, tv=True), fl=True)
-            for vertex in vertices:
-                if vertex in vertices1:
-                    return True
-        
-        return False
-    
-    
     def generate_city(self, *args):
         print('Generating City')
+        cmds.scrollField(self.debugLog, edit=True, insertText='Generating City\n')
+        cmds.refresh(f=True)
     
         
         cityGridSize = cmds.floatFieldGrp(self.cityGridSize, query=True, value=True)
@@ -115,6 +109,10 @@ class Settings_Window(object):
                 cmds.parent("Building" + str(i), "CityGroup")
                 self.generatedBuldingList.append("Building" + str(i))
                 print("Building" + str(i) + " created")
+                cmds.scrollField(self.debugLog, edit=True, insertText="Building" + str(i) + " created\n")
+            
+            cmds.refresh(f=True)
+                
         
         
         #make a plane the size of city grid size and add it to the city group
@@ -124,12 +122,21 @@ class Settings_Window(object):
         
     def delete_city(self, *args):
             print('Deleting City')
+            cmds.scrollField(self.debugLog, edit=True, insertText='Deleting City\n')
+            cmds.refresh(f=True)
+            
         
             cmds.delete("CityGroup")
             cmds.delete("BuildingGroup")
             
             #clear the list
             self.generatedBuldingList.clear()
+            self.already_seen.clear()
+            cmds.scrollField(self.debugLog, edit=True, insertText='City Deleted\n')
+            cmds.refresh(f=True)
+            
+            
+
         
 if __name__ == '__main__':
     Settings_Window()
