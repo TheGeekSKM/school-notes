@@ -108,7 +108,7 @@ def apply_cloud_config(musgrave_texture_node, color_ramp_node, additional_backgr
     
     musgrave_texture_node.inputs["Scale"].default_value = cloud_size
     musgrave_texture_node.inputs["Vector"].default_value = cloud_vector
-    color_ramp_node.color_ramp.elements[1].position = (1 - cloud_opacity)
+    color_ramp_node.color_ramp.elements[1].position = (cloud_opacity)
     additional_background_node.inputs["Strength"].default_value = cloud_intensity
     color_ramp_node.color_ramp.elements[1].color = (
         cloud_color[0],

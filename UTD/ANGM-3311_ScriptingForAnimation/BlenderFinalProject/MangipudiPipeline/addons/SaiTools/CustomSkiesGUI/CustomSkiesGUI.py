@@ -30,8 +30,8 @@ class SkiesGUI(QtWidgets.QWidget):
         self.preexisting_sky_label = QtWidgets.QLabel("Click on any of the buttons below to set up a pre-existing sky.")
         self.moon_atmosphere_button = QtWidgets.QPushButton("Moon Atmosphere")
         self.dusty_atmosphere_button = QtWidgets.QPushButton("Dusty Atmosphere")
-        self.soft_moonlight_button = QtWidgets.QPushButton("Soft Moonlight")
-        self.harsh_moonlight_button = QtWidgets.QPushButton("Harsh Moonlight")
+        self.soft_sunset_button = QtWidgets.QPushButton("Soft Sunset")
+        self.harsh_sunset_button = QtWidgets.QPushButton("Harsh Sunset")
         self.cloudy_day_button = QtWidgets.QPushButton("Cloudy/Overcast Day")
         self.normal_day_button = QtWidgets.QPushButton("Normal Daylight")
         
@@ -205,8 +205,8 @@ class SkiesGUI(QtWidgets.QWidget):
         self.preexisting_sky_layout.addWidget(self.preexisting_sky_label)
         self.preexisting_sky_layout.addWidget(self.moon_atmosphere_button)
         self.preexisting_sky_layout.addWidget(self.dusty_atmosphere_button)
-        self.preexisting_sky_layout.addWidget(self.soft_moonlight_button)
-        self.preexisting_sky_layout.addWidget(self.harsh_moonlight_button)
+        self.preexisting_sky_layout.addWidget(self.soft_sunset_button)
+        self.preexisting_sky_layout.addWidget(self.harsh_sunset_button)
         self.preexisting_sky_layout.addWidget(self.cloudy_day_button)
         self.preexisting_sky_layout.addWidget(self.normal_day_button)
         
@@ -357,8 +357,8 @@ class SkiesGUI(QtWidgets.QWidget):
         
         self.moon_atmosphere_button.clicked.connect(self.moon_atmosphere_sky)
         self.dusty_atmosphere_button.clicked.connect(self.dusty_atmosphere_sky)
-        self.soft_moonlight_button.clicked.connect(self.soft_moonlight_sky)
-        self.harsh_moonlight_button.clicked.connect(self.harsh_moonlight_sky)
+        self.soft_sunset_button.clicked.connect(self.soft_sunset_sky)
+        self.harsh_sunset_button.clicked.connect(self.harsh_sunset_sky)
         self.cloudy_day_button.clicked.connect(self.cloudy_day_sky)
         self.normal_day_button.clicked.connect(self.normal_day_sky)
         
@@ -428,20 +428,138 @@ class SkiesGUI(QtWidgets.QWidget):
             cloud_config
         )
     
-    def soft_moonlight_sky(self):
-        print("Soft Moonlight")
+    def soft_sunset_sky(self):
+        print("Soft Sunset")
+        sun_config = CustomSkiesFunctions.create_sun_config(
+            sun_rotation=308.0,
+            sun_intensity=2.8,
+            sun_elevation=1.2,
+            sun_size=19.5,
+            altitude=0.9,
+            air_density=1.154,
+            dust_density=0.615,
+            ozone_density=10.0
+        )
+        color_config = CustomSkiesFunctions.create_color_config(
+            sky_color=[0.012, 0.006, 0.017],
+            mix_factor=0.693
+        )
+        cloud_config = CustomSkiesFunctions.create_cloud_config(
+            cloud_size=2.0,
+            cloud_vector=[0.5, 0.5, 0.5],
+            cloud_opacity=1.0,
+            cloud_intensity=0.551,
+            cloud_color=[1.0, 0.575, 0.239]
+        )
+        CustomSkiesFunctions.execute_config(
+            sun_config,
+            color_config,
+            cloud_config
+        )
     
-    def harsh_moonlight_sky(self):
-        print("Harsh Moonlight")
+    def harsh_sunset_sky(self):
+        print("Harsh Sunset")
+        sun_config = CustomSkiesFunctions.create_sun_config(
+            sun_rotation=308.0,
+            sun_intensity=2.8,
+            sun_elevation=1.2,
+            sun_size=5.5,
+            altitude=0.9,
+            air_density=1.154,
+            dust_density=0.615,
+            ozone_density=10.0
+        )
+        color_config = CustomSkiesFunctions.create_color_config(
+            sky_color=[0.012, 0.006, 0.017],
+            mix_factor=0.693
+        )
+        cloud_config = CustomSkiesFunctions.create_cloud_config(
+            cloud_size=2.0,
+            cloud_vector=[0.5, 0.5, 0.5],
+            cloud_opacity=1.0,
+            cloud_intensity=0.551,
+            cloud_color=[1.0, 0.575, 0.239]
+        )
+        CustomSkiesFunctions.execute_config(
+            sun_config,
+            color_config,
+            cloud_config
+        )
         
     def cloudy_day_sky(self):
         print("Cloudy Day")
     
     def normal_day_sky(self):
         print("Normal Day")
+
+    #region Update Sky With Custom Values
+    def gather_values_from_ui(self):
+        print("Gather Values")
+        self.sun_rotation = self.sun_rotation_spin_box.value()
+        self.sun_intensity = self.sun_intensity_spin_box.value()
+        self.sun_elevation = self.sun_elevation_spin_box.value()
+        self.sun_size = self.sun_size_spin_box.value()
+        self.altitude = self.altitude_spin_box.value()
+        self.air_density = self.air_density_spin_box.value()
+        self.dust_density = self.dust_density_spin_box.value()
+        self.ozone_density = self.ozone_density_spin_box.value()
+        self.sky_color = (
+            self.sky_color_x_spin_box.value(), 
+            self.sky_color_y_spin_box.value(), 
+            self.sky_color_z_spin_box.value(),
+            1.0
+        )
+        self.mix_factor = self.mix_factor_spin_box.value()
+        self.cloud_size = self.cloud_size_spin_box.value()
+        self.cloud_vector = [
+            self.cloud_vector_x_spin_box.value(), 
+            self.cloud_vector_y_spin_box.value(), 
+            self.cloud_vector_z_spin_box.value()]
+        self.cloud_opacity = self.cloud_opacity_spin_box.value()
+        self.cloud_intensity = self.cloud_intensity_spin_box.value()
+        self.cloud_color = (
+            self.cloud_color_x_spin_box.value(), 
+            self.cloud_color_y_spin_box.value(), 
+            self.cloud_color_z_spin_box.value(),
+            1.0
+        )
         
+    def create_custom_configs(self):
+        print("Create Configs")
+        sun_config = CustomSkiesFunctions.create_sun_config(
+            sun_rotation=self.sun_rotation,
+            sun_intensity=self.sun_intensity,
+            sun_elevation=self.sun_elevation,
+            sun_size=self.sun_size,
+            altitude=self.altitude,
+            air_density=self.air_density,
+            dust_density=self.dust_density,
+            ozone_density=self.ozone_density
+        )
+        color_config = CustomSkiesFunctions.create_color_config(
+            sky_color=self.sky_color,
+            mix_factor=self.mix_factor
+        )
+        cloud_config = CustomSkiesFunctions.create_cloud_config(
+            cloud_size=self.cloud_size,
+            cloud_vector=self.cloud_vector,
+            cloud_opacity=self.cloud_opacity,
+            cloud_intensity=self.cloud_intensity,
+            cloud_color=self.cloud_color
+        )
+        
+        return sun_config, color_config, cloud_config
+    
     def update_sky(self):
         print("Update Sky")
+        self.gather_values_from_ui()
+        sun_config, color_config, cloud_config = self.create_custom_configs()
+        CustomSkiesFunctions.execute_config(
+            sun_config, 
+            color_config, 
+            cloud_config
+        )        
+    #endregion
         
     #endregion
         
