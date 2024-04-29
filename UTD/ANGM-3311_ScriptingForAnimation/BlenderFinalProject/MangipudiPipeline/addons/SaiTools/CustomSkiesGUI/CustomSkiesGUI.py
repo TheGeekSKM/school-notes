@@ -67,19 +67,19 @@ class SkiesGUI(QtWidgets.QWidget):
     def define_sky_settings_air_density(self):
         self.air_density_label = QtWidgets.QLabel("Air Density")
         self.air_density_spin_box = QtWidgets.QSpinBox()
-        self.air_density_spin_box.setRange(1, 10)
+        self.air_density_spin_box.setRange(0, 10)
         self.air_density_spin_box.setValue(5)
         
     def define_sky_settings_dust_density(self):
         self.dust_density_label = QtWidgets.QLabel("Dust Density")
         self.dust_density_spin_box = QtWidgets.QSpinBox()
-        self.dust_density_spin_box.setRange(1, 10)
+        self.dust_density_spin_box.setRange(0, 10)
         self.dust_density_spin_box.setValue(5)
     
     def define_sky_settings_ozone_density(self):
         self.ozone_density_label = QtWidgets.QLabel("Ozone Density")
         self.ozone_density_spin_box = QtWidgets.QSpinBox()
-        self.ozone_density_spin_box.setRange(1, 10)
+        self.ozone_density_spin_box.setRange(0, 10)
         self.ozone_density_spin_box.setValue(5)
     
     def define_sky_settings_sun_size(self):
@@ -105,7 +105,7 @@ class SkiesGUI(QtWidgets.QWidget):
     def define_sky_settings_sky_color_prevalence(self):
         self.mix_factor_label = QtWidgets.QLabel("Sky Color Prevalence")
         self.mix_factor_spin_box = QtWidgets.QDoubleSpinBox()
-        self.mix_factor_spin_box.setRange(0.1, 0.9)
+        self.mix_factor_spin_box.setRange(0.0, 1.0)
         self.mix_factor_spin_box.setValue(0.5)
         
     def define_sky_settings_cloud_size(self):
@@ -364,10 +364,12 @@ class SkiesGUI(QtWidgets.QWidget):
         
         self.update_sky_button.clicked.connect(self.update_sky)
     
+    
     #region Signal Definitions
     def complete_random_sky(self):
         print("Complete Random Sky")
-        CustomSkiesFunctions.execute_random_configurations()
+        sun_config, color_config, cloud_config = CustomSkiesFunctions.execute_random_configurations()
+        self.update_visual_values(sun_config, color_config, cloud_config)
         
     def moon_atmosphere_sky(self):
         print("Moon Atmosphere")
@@ -398,6 +400,7 @@ class SkiesGUI(QtWidgets.QWidget):
             color_config, 
             cloud_config
         )
+        self.update_visual_values(sun_config, color_config, cloud_config)
         
     def dusty_atmosphere_sky(self):
         print("Dusty Atmosphere")
@@ -427,6 +430,8 @@ class SkiesGUI(QtWidgets.QWidget):
             color_config, 
             cloud_config
         )
+        self.update_visual_values(sun_config, color_config, cloud_config)
+        
     
     def soft_sunset_sky(self):
         print("Soft Sunset")
@@ -456,6 +461,8 @@ class SkiesGUI(QtWidgets.QWidget):
             color_config,
             cloud_config
         )
+        self.update_visual_values(sun_config, color_config, cloud_config)
+        
     
     def harsh_sunset_sky(self):
         print("Harsh Sunset")
@@ -485,12 +492,70 @@ class SkiesGUI(QtWidgets.QWidget):
             color_config,
             cloud_config
         )
+        self.update_visual_values(sun_config, color_config, cloud_config)
+        
         
     def cloudy_day_sky(self):
         print("Cloudy Day")
+        sun_config = CustomSkiesFunctions.create_sun_config(
+            sun_rotation=308.0,
+            sun_intensity=0.2,
+            sun_elevation=1.2,
+            sun_size=90.0,
+            altitude=0.9,
+            air_density=10.0,
+            dust_density=4.0,
+            ozone_density=6.0
+        )
+        color_config = CustomSkiesFunctions.create_color_config(
+            sky_color=[0.22, 0.251, 0.319],
+            mix_factor=0.963
+        )
+        cloud_config = CustomSkiesFunctions.create_cloud_config(
+            cloud_size=0.3,
+            cloud_vector=[0.5, 0.5, 0.5],
+            cloud_opacity=0.454,
+            cloud_intensity=0.716,
+            cloud_color=[0.16, 0.276, 0.495]
+        )
+        CustomSkiesFunctions.execute_config(
+            sun_config,
+            color_config,
+            cloud_config
+        )
+        self.update_visual_values(sun_config, color_config, cloud_config)
+        
     
     def normal_day_sky(self):
         print("Normal Day")
+        sun_config = CustomSkiesFunctions.create_sun_config(
+            sun_rotation=308.0,
+            sun_intensity=3.0,
+            sun_elevation=9.7,
+            sun_size=5.5,
+            altitude=0.9,
+            air_density=1.0,
+            dust_density=1.0,
+            ozone_density=10.0
+        )
+        color_config = CustomSkiesFunctions.create_color_config(
+            sky_color=[0.0, 0.0, 0.0],
+            mix_factor=0.307
+        )
+        cloud_config = CustomSkiesFunctions.create_cloud_config(
+            cloud_size=2.0,
+            cloud_vector=[0.5, 0.5, 0.5],
+            cloud_opacity=0.836,
+            cloud_intensity=0.551,
+            cloud_color=[0.652, 0.715, 0.626]
+        )
+        CustomSkiesFunctions.execute_config(
+            sun_config,
+            color_config,
+            cloud_config
+        )
+        self.update_visual_values(sun_config, color_config, cloud_config)
+        
 
     #region Update Sky With Custom Values
     def gather_values_from_ui(self):
@@ -558,7 +623,46 @@ class SkiesGUI(QtWidgets.QWidget):
             sun_config, 
             color_config, 
             cloud_config
-        )        
+        )
+        
+    
+    
+    def update_sun_visual_values(self, sun_config):
+        '''Update the visual values of the sun settings'''
+        self.sun_rotation_spin_box.setValue(sun_config['sun_rotation'])
+        self.sun_intensity_spin_box.setValue(sun_config['sun_intensity'])
+        self.sun_elevation_spin_box.setValue(sun_config['sun_elevation'])
+        self.sun_size_spin_box.setValue(sun_config['sun_size'])
+        self.altitude_spin_box.setValue(sun_config['altitude'])
+        self.air_density_spin_box.setValue(sun_config['air_density'])
+        self.dust_density_spin_box.setValue(sun_config['dust_density'])
+        self.ozone_density_spin_box.setValue(sun_config['ozone_density'])
+        
+    def update_color_visual_values(self, color_config):
+        '''Update the visual values of the color settings'''
+        self.sky_color_x_spin_box.setValue(color_config['sky_color'][0])
+        self.sky_color_y_spin_box.setValue(color_config['sky_color'][1])
+        self.sky_color_z_spin_box.setValue(color_config['sky_color'][2])
+        self.mix_factor_spin_box.setValue(color_config['mix_factor']) 
+        
+    def update_cloud_visual_values(self, cloud_config):
+        '''Update the visual values of the cloud settings'''
+        self.cloud_size_spin_box.setValue(cloud_config['cloud_size'])
+        self.cloud_vector_x_spin_box.setValue(cloud_config['cloud_vector'][0])
+        self.cloud_vector_y_spin_box.setValue(cloud_config['cloud_vector'][1])
+        self.cloud_vector_z_spin_box.setValue(cloud_config['cloud_vector'][2])
+        self.cloud_opacity_spin_box.setValue(cloud_config['cloud_opacity'])
+        self.cloud_intensity_spin_box.setValue(cloud_config['cloud_intensity'])
+        self.cloud_color_x_spin_box.setValue(cloud_config['cloud_color'][0])
+        self.cloud_color_y_spin_box.setValue(cloud_config['cloud_color'][1])
+        self.cloud_color_z_spin_box.setValue(cloud_config['cloud_color'][2])   
+    
+    def update_visual_values(self, sun_config, color_config, cloud_config):
+        print("Update Visual Values")
+        self.update_sun_visual_values(sun_config)
+        self.update_color_visual_values(color_config)
+        self.update_cloud_visual_values(cloud_config)        
+    
     #endregion
         
     #endregion

@@ -28,7 +28,7 @@ from . import CustomSkiesGUI
 from importlib import reload
 
 tools = [
-    CustomSkies.CustomSkiesOperator,
+    CustomSkies.SaiToolsPanel,
     CustomSkiesGUI.CustomSkiesGUIOperator
 ]
 

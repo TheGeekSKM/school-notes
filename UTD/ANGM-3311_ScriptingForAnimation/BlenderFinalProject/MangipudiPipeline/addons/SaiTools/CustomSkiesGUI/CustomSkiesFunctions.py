@@ -308,6 +308,7 @@ def execute_random_configurations():
         color_config=color_config, 
         cloud_config=cloud_config
     )
+    return sun_config, color_config, cloud_config
 
 def execute_config(sun_config, color_config, cloud_config):
     '''Executes the configurations for the sky'''

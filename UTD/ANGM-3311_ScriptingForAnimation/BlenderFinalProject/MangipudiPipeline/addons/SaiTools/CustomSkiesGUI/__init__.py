@@ -7,7 +7,7 @@ from . import CustomSkiesGUI
 
 class CustomSkiesGUIOperator(bpy.types.Operator):
     bl_idname = "saitools.customskiesgui"
-    bl_label = "Sai Tools - Custom Skies GUI"
+    bl_label = "Custom Skies"
     
 
     def execute(self, context):
